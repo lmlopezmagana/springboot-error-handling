@@ -3,8 +3,11 @@ package net.openwebinars.springboot.errorhandling.controller;
 import lombok.RequiredArgsConstructor;
 import net.openwebinars.springboot.errorhandling.model.Note;
 import net.openwebinars.springboot.errorhandling.repo.NoteRepository;
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -49,7 +52,8 @@ public class NoteController {
     private ResponseEntity<List<Note>> buildResponseOfAList(List<Note> list) {
 
         if (list.isEmpty())
-            return ResponseEntity.notFound().build();
+            //return ResponseEntity.notFound().build();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No notes finded");
         else
             return ResponseEntity.ok(list);
 
