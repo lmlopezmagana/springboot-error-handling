@@ -23,7 +23,7 @@ public class ApiCustomErrorAttributes extends DefaultErrorAttributes {
     @Override
     public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
         Map<String,Object> defaultErrorAttributes = super.getErrorAttributes(webRequest, options);
-        ApiError apiError = ApiErrorImpl.fromErrorAttributes(defaultErrorAttributes);
+        ApiError apiError = ApiError.fromErrorAttributes(defaultErrorAttributes);
         return objectMapper.convertValue(apiError, Map.class);
     }
 }

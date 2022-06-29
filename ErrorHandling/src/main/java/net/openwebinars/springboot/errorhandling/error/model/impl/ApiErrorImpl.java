@@ -44,33 +44,5 @@ public class ApiErrorImpl implements ApiError {
         return null;
     }
 
-    public static ApiError fromErrorAttributes(Map<String, Object> defaultErrorAttributesMap) {
-
-        int statusCode = ((Integer)defaultErrorAttributesMap.get("status")).intValue();
-
-
-        ApiErrorImpl result =
-                ApiErrorImpl.builder()
-                    .status(HttpStatus.valueOf(statusCode))
-                    .statusCode(statusCode)
-                    .message((String) defaultErrorAttributesMap.getOrDefault("message", "No message available"))
-                    .path((String) defaultErrorAttributesMap.getOrDefault("path", "No path available"))
-                    .build();
-
-        if (defaultErrorAttributesMap.containsKey("errors")) {
-
-            List<ObjectError> errors = (List<ObjectError>) defaultErrorAttributesMap.get("errors");
-
-            List<ApiSubError> subErrors = errors.stream()
-                    .map(ApiValidationSubError::fromObjectError)
-                    .collect(Collectors.toList());
-
-            result.setSubErrors(subErrors);
-
-        }
-
-        return result;
-    }
-
 
 }
