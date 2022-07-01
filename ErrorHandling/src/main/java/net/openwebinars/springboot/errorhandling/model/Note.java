@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,6 +18,7 @@ public class Note {
     @Id @GeneratedValue
     private Long id;
 
+    @NotEmpty
     private String title;
     private String content;
     private String author;

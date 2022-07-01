@@ -40,9 +40,4 @@ public class ApiErrorImpl implements ApiError {
     }
 
 
-    public DefaultErrorAttributes toErrorAttributes() {
-        return null;
-    }
-
-
 }
