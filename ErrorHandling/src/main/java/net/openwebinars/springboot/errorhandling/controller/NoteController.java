@@ -54,7 +54,7 @@ public class NoteController {
 
         if (list.isEmpty())
             //return ResponseEntity.notFound().build();
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No notes finded");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No notes found");
         else
             return ResponseEntity.ok(list);
 
