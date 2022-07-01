@@ -3,6 +3,7 @@ package net.openwebinars.springboot.errorhandling.controller;
 import lombok.RequiredArgsConstructor;
 import net.openwebinars.springboot.errorhandling.model.Note;
 import net.openwebinars.springboot.errorhandling.repo.NoteRepository;
+import net.openwebinars.springboot.errorhandling.service.NoteService;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,52 +20,60 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NoteController {
 
-    private final NoteRepository repository;
+    //private final NoteRepository repository;
+    private final NoteService noteService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Note>> getAll() {
+    //public ResponseEntity<List<Note>> getAll() {
+    public List<Note> getAll() {
         // Utilizamos un método comun para devolver la respuesta de todos los List<Note>
-        return buildResponseOfAList(repository.findAll());
+        //return buildResponseOfAList(repository.findAll());
+
+        return noteService.findAll();
+
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Note> getById(@PathVariable Long id) {
+    //public ResponseEntity<Note> getById(@PathVariable Long id) {
+    public Note getById(@PathVariable Long id) {
         /*
             El método ResponseEntity.of recibe como argumento un Optional<?> y devuelve
                 - 200 Ok si Optional.isPresent() == true
                 - 404 Not Found si Optional.isEmpty() == true
          */
-        return ResponseEntity.of(repository.findById(id));
+        //return ResponseEntity.of(repository.findById(id));
+
+        return noteService.findById(id);
+
     }
 
 
     @GetMapping("/author/{author}")
-    public ResponseEntity<List<Note>> getByAuthor(@PathVariable String author) {
+    //public ResponseEntity<List<Note>> getByAuthor(@PathVariable String author) {
+    public List<Note> getByAuthor(@PathVariable String author) {
         // Utilizamos un método comun para devolver la respuesta de todos los List<Note>
-        return buildResponseOfAList(repository.findByAuthor(author));
+        //return buildResponseOfAList(repository.findByAuthor(author));
+
+        return noteService.getByAuthor(author);
     }
 
-    /**
-     * Este método sirve para devolver la respuesta de un List<Note>
-     * @param list Lista que vendrá de una consulta en el repositorio
-     * @return 404 si la lista está vacía, 200 OK si la lista tiene elementos
-     */
-    private ResponseEntity<List<Note>> buildResponseOfAList(List<Note> list) {
+    /*private ResponseEntity<List<Note>> buildResponseOfAList(List<Note> list) {
 
         if (list.isEmpty())
             //return ResponseEntity.notFound().build();
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No notes finded");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No notes found");
         else
             return ResponseEntity.ok(list);
 
 
-    }
+    }*/
 
     @PostMapping("/")
     public ResponseEntity<Note> createNewNote(@Valid @RequestBody Note note) {
 
-        Note created = repository.save(note);
+        // En este método sí queremos gestionar la respuesta, para devolver 201
+        Note created = noteService.save(note);
 
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -83,8 +92,11 @@ public class NoteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Note> edit(@PathVariable Long id, @RequestBody Note edited) {
+    //public ResponseEntity<Note> edit(@PathVariable Long id, @RequestBody Note edited) {
+    public Note edit(@PathVariable Long id, @RequestBody Note edited) {
+        return noteService.edit(id, edited);
 
+        /*
         return ResponseEntity.of(
                 repository.findById(id)
                     .map(note -> {
@@ -94,7 +106,7 @@ public class NoteController {
                         note.setImportant(edited.isImportant());
                         return repository.save(note);
                     }));
-
+           */
 
 
     }
@@ -104,7 +116,8 @@ public class NoteController {
 
         // Dejamos esta línea comentada para provocar un error 500 si eliminamos dos veces un mismo recurso
         //if (repository.existsById(id))
-            repository.deleteById(id);
+        //   repository.deleteById(id);
+        noteService.delete(id);
 
         return ResponseEntity.noContent().build();
 
