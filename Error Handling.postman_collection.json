@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "5456082e-7bd5-4a80-8ab7-e9b7eaa94eb4",
+		"name": "Error Handling",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6104479"
+	},
+	"item": [
+		{
+			"name": "Errores varios",
+			"item": [
+				{
+					"name": "GET 404",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Error verbo HTTP",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/note/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"note",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Error JSON",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"First note\",\n    \"content\": \"Lorem Ipsum Dolor Sit Amet....\",\n    \"author\": 12345,\n    \"important\": \"very important\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/note/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"note",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Nueva nota sin titulo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"Lorem Ipsum Dolor Sit Amet....\",\n    \"author\": \"John Doe\",\n    \"important\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/note/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"note",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Por Id Error Accept",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/html",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/note/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"note",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Todos Error Accept",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/html",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/note/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"note",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Por Id Error Bad Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/note/1asd",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"note",
+								"1asd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Peticiones correctas",
+			"item": [
+				{
+					"name": "GET Todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/note/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"note",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Por autor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/note/author/john",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"note",
+								"author",
+								"john"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Nueva nota",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"First note\",\n    \"content\": \"Lorem Ipsum Dolor Sit Amet....\",\n    \"author\": \"John Doe\",\n    \"important\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/note/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"note",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Editar nota",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Bello Gallico\",\n    \"content\": \"Gallia est omnis divisa in partes tres...\",\n    \"author\": \"Julius Caesar\",\n    \"important\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/note/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"note",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Borrar nota",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/note/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"note",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Por Id Ok",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/note/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"note",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
