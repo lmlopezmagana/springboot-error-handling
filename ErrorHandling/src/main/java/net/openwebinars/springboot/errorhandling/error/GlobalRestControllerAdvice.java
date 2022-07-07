@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -24,12 +25,12 @@ import java.util.stream.Collectors;
 
 
 @RestControllerAdvice
-public class GlobalRestControllerAdvice extends ResponseEntityExceptionHandler {
+public class GlobalRestControllerAdvice /*extends ResponseEntityExceptionHandler*/ {
 
-    @Override
+    /*@Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
         return buildApiError(ex.getMessage(), request, status);
-    }
+    }*/
 
 
     @ExceptionHandler({NoteNotFoundException.class, EmptyNoteListException.class})
@@ -37,18 +38,20 @@ public class GlobalRestControllerAdvice extends ResponseEntityExceptionHandler {
         return buildApiError(exception.getMessage(), request, HttpStatus.NOT_FOUND);
     }
 
-    @Override
+    /*@Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         return buildApiError("Error on marshalling / unmarshalling of a JSON object: " + ex.getMessage(), request, status);
 
-    }
+    }*/
 
 
-    @Override
+    /*@Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         //return super.handleMethodArgumentNotValid(ex, headers, status, request);
         return buildApiErrorWithSubErrors("Validation error. Please check the sublist.", request, status, ex.getAllErrors());
-    }
+    }*/
+
+
 
     private final ResponseEntity<Object> buildApiError(String message, WebRequest request, HttpStatus status) {
         return ResponseEntity
