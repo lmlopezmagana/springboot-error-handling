@@ -56,7 +56,7 @@ public class NoteService {
                     note.setImportant(edited.isImportant());
                     return repository.save(note);
                 })
-                .orElseThrow(() -> new NoteNotFoundException());
+                .orElseThrow(NoteNotFoundException::new);
     }
 
     public void delete(Long id) {

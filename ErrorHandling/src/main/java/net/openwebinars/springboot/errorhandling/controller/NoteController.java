@@ -1,5 +1,6 @@
 package net.openwebinars.springboot.errorhandling.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import net.openwebinars.springboot.errorhandling.model.Note;
 import net.openwebinars.springboot.errorhandling.repo.NoteRepository;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 

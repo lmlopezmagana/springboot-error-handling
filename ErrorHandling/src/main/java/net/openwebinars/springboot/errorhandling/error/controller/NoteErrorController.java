@@ -1,6 +1,7 @@
 package net.openwebinars.springboot.errorhandling.error.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import net.openwebinars.springboot.errorhandling.error.model.ApiError;
 import net.openwebinars.springboot.errorhandling.error.model.impl.ApiErrorImpl;
@@ -18,8 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
+
 import java.util.Collections;
 import java.util.Map;
 

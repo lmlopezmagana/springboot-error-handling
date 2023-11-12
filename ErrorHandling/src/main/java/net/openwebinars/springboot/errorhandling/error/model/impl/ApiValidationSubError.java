@@ -27,8 +27,7 @@ public class ApiValidationSubError extends ApiSubError {
 
 
     public static ApiValidationSubError fromObjectError(ObjectError objectError) {
-        if (objectError instanceof FieldError) {
-            FieldError fieldError = (FieldError) objectError;
+        if (objectError instanceof FieldError fieldError) {
 
             return
                     ApiValidationSubError.builder()
