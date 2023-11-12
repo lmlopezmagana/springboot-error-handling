@@ -26,7 +26,7 @@ public class NoteController {
     @GetMapping("/")
     //public ResponseEntity<List<Note>> getAll() {
     public List<Note> getAll() {
-        // Utilizamos un método comun para devolver la respuesta de todos los List<Note>
+        // Utilizamos un método común para devolver la respuesta de todos los List<Note>
         //return buildResponseOfAList(repository.findAll());
 
         return noteService.findAll();
@@ -58,16 +58,7 @@ public class NoteController {
         return noteService.getByAuthor(author);
     }
 
-    /*private ResponseEntity<List<Note>> buildResponseOfAList(List<Note> list) {
 
-        if (list.isEmpty())
-            //return ResponseEntity.notFound().build();
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No notes found");
-        else
-            return ResponseEntity.ok(list);
-
-
-    }*/
 
     @PostMapping("/")
     public ResponseEntity<Note> createNewNote(@Valid @RequestBody Note note) {
@@ -96,17 +87,6 @@ public class NoteController {
     public Note edit(@PathVariable Long id, @RequestBody Note edited) {
         return noteService.edit(id, edited);
 
-        /*
-        return ResponseEntity.of(
-                repository.findById(id)
-                    .map(note -> {
-                        note.setTitle(edited.getTitle());
-                        note.setContent(edited.getContent());
-                        note.setAuthor(edited.getAuthor());
-                        note.setImportant(edited.isImportant());
-                        return repository.save(note);
-                    }));
-           */
 
 
     }
@@ -114,9 +94,7 @@ public class NoteController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
 
-        // Dejamos esta línea comentada para provocar un error 500 si eliminamos dos veces un mismo recurso
-        //if (repository.existsById(id))
-        //   repository.deleteById(id);
+
         noteService.delete(id);
 
         return ResponseEntity.noContent().build();

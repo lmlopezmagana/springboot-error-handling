@@ -60,10 +60,7 @@ public class NoteService {
     }
 
     public void delete(Long id) {
-        // En este caso no queremos usar excepciones, sino directamente
-        // prevenir el posible error
-        if (repository.existsById(id))
-            repository.deleteById(id);
+        repository.deleteById(id);
     }
 
 }
